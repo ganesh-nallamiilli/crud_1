@@ -109,9 +109,9 @@ function Fields(props){
 
     
     return(
-        <div className='row mt-5'>
+        <div className='row align-items-center mt-5'>
             {change == props.data._id?<><input className='col-4 mt-3' placeholder='Edit here' value={work} onChange={(e)=>setWork(e.target.value)} />
-            <button className='col-2 offset-1 btn btn-outline-success mt-3' onClick={UpdateDetails}>Submit</button></>:<><li className='col-4' style={{listStyleType:'none',margin:"0",padding:'0'}}>{props.data.work}</li>
+            <button className='col-2 offset-1 btn btn-outline-success mt-3' onClick={UpdateDetails}>Update</button></>:<><li className='col-4' style={{listStyleType:'none',margin:"0",padding:'0'}}>{props.data.work}</li>
             <button className='col-2 offset-1 btn btn-outline-info' onClick={(e)=>handler(props.data._id)}>Edit</button>
             </>}
             
@@ -122,37 +122,3 @@ function Fields(props){
 
 
 export default Home;
-
-// import React,{useState} from 'react';
-
-
-// const Home = () => {
-
-//     const [state,setState]=useState({work:'',phone:''})
-//     console.log(state);
-//     return (
-//         <div>
-//             <input type={"text"} onChange={(e)=>{
-//                 setState({...state,work:e.target.value})
-//             }} id="name"/>
-//             <input type={"text"} id="phone" onChange={(e)=>{
-//                 setState({...state,phone:e.target.value})
-//             }}/>
-//             <button type='submit'
-//             value={"submit"} onClick={()=>{
-//                 console.log('----------',state)
-//                 fetch("http://localhost:5000/postdata",{
-//             method:"POST",
-//             headers:{
-//                 'content-Type':'application/json'
-//             },
-//             body:JSON.stringify({
-//                 "work":state.work
-//             })
-//         })
-//             }}>submit</button>
-//         </div>
-//     );
-// };
-
-// export default Home;
