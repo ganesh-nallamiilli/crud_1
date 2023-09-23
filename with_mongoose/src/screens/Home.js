@@ -111,7 +111,7 @@ function Fields(props){
     return(
         <div className='row align-items-center mt-5'>
             {change == props.data._id?<><input className='col-4 mt-3' placeholder='Edit here' value={work} onChange={(e)=>setWork(e.target.value)} />
-            <button className='col-2 offset-1 btn btn-outline-success mt-3' onClick={UpdateDetails}>Update</button></>:<><li className='col-4' style={{listStyleType:'none',margin:"0",padding:'0'}}>{props.data.work}</li>
+            <button className='col-2 offset-1 btn btn-outline-success mt-3' onClick={UpdateDetails}>Update</button></>:<><li className='col-4' style={{listStyleType:'none',margin:"0",padding:'0', fontSize:"24px"}}>{props.data.work}</li>
             <button className='col-2 offset-1 btn btn-outline-info' onClick={(e)=>handler(props.data._id)}>Edit</button>
             </>}
             
