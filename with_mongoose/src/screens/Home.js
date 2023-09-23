@@ -8,7 +8,7 @@ function Home() {
     const [Temp,setTemp] =useState("jbdsjb");
     useEffect(()=>{
         getData()
-    }) 
+    },[Temp]) 
 
     const getData =()=>{
         fetch("http://localhost:5000/getdata",{
@@ -23,6 +23,7 @@ function Home() {
     }
 
     const post_data = ()=>{
+        console.log("Helo")
         fetch("http://localhost:5000/postdata",{
         method:"POST",
         headers: {
@@ -33,13 +34,13 @@ function Home() {
        })
       })
       .then(res=>res.json())
-      .then(()=>{
-        setWork("")
-      }
-      )
-      
-      setTemp("jdsbfjkd")
-      
+      .then(response => {
+        setWork(""); 
+        setTemp("create"+response?._id);
+      })
+      .catch(error => {
+        console.error("Error: ------------", error);
+      });
     }
 
     
@@ -50,7 +51,7 @@ function Home() {
             <hr />
             <div className='container mt-3' >
                 <div className='row mt-4'>
-                    <input className='col-7 ' placeholder='Add remainder' onChange={(e)=>{setWork(e.target.value)}} />
+                    <input className='col-7 ' placeholder='Add remainder' onChange={(e)=>{setWork(e.target.value)}} value={work} />
                     <button className='btn btn-outline-secondary col-2 offset-1' onClick={post_data}>Add</button>
                 </div>
             </div>
@@ -87,7 +88,7 @@ function Fields(props){
         })
         .then(res=>{
             
-            props.setTemp("oiejkwj")
+            props.setTemp("update"+props.data._id)
             setChange("")
             alert("Updated.")})
       }
@@ -102,7 +103,7 @@ function Fields(props){
                 "id":props.data._id
             })
         }).then(()=>{
-            props.setTemp("oiejk6112wj")
+            props.setTemp("delete"+props.data._id)
             alert("Deleted")})
          
       }
@@ -110,12 +111,14 @@ function Fields(props){
     
     return(
         <div className='row align-items-center mt-5'>
-            {change == props.data._id?<><input className='col-4 mt-3' placeholder='Edit here' value={work} onChange={(e)=>setWork(e.target.value)} />
-            <button className='col-2 offset-1 btn btn-outline-success mt-3' onClick={UpdateDetails}>Update</button></>:<><li className='col-4' style={{listStyleType:'none',margin:"0",padding:'0', fontSize:"24px"}}>{props.data.work}</li>
+            {change === props.data._id?<><input className='col-4 py-1' placeholder='Edit here' value={work} onChange={(e)=>setWork(e.target.value)} />
+            <button className='col-2 offset-1 btn btn-outline-success' onClick={UpdateDetails}>Update</button><button className='col-2 offset-1 btn btn-outline-danger' onClick={(e)=>handler("")}>Cancel</button></>
+            :<><li className='col-4 text-truncate' style={{listStyleType:'none',margin:"0",padding:'0', fontSize:"24px"}}>{props.data.work}</li>
             <button className='col-2 offset-1 btn btn-outline-info' onClick={(e)=>handler(props.data._id)}>Edit</button>
+            <button className='col-2 offset-1 btn btn-outline-danger' onClick={deleteData}>Delete</button>
             </>}
             
-            <button className='col-2 offset-1 btn btn-outline-danger' onClick={deleteData}>Delete</button>
+           
         </div>
     )
 }
