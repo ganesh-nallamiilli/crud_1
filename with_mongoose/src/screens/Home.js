@@ -47,7 +47,7 @@ function Home() {
 
     return (
         <div>
-            <h1 className='text-center mt-5'>Crud Application With Mongoose</h1>
+            <h1 className='text-center mt-5'>Crud Operations</h1>
             <hr />
             <div className='container mt-3' >
                 <div className='row mt-4'>
